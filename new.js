@@ -1,26 +1,26 @@
 const SearchSongs = () => {
 
-    const SearchInput =document.getElementById("search-input").value;
+    const SearchInput = document.getElementById("search-input").value;
 
     fetch(`https://api.lyrics.ovh/suggest/${SearchInput}`)
 
-    .then(response => response.json())
-    .then( data  => displaySong(data.data))
-    .catch(err => displayError("Something went wrong Plese try again !"))
+        .then(response => response.json())
+        .then(data => displaySong(data.data))
+        .catch(err => displayError("Something went wrong Plese try again !"))
 }
- 
-const displaySong= (songs) => {
-   document.getElementById("container-songs").innerHTML='';
-    const containerSong =document.getElementById("container-songs");
-   
+
+const displaySong = (songs) => {
+    document.getElementById("container-songs").innerHTML = '';
+    const containerSong = document.getElementById("container-songs");
+
     songs.forEach(song => {
-      
-        const newDiv =document.createElement("div");
-              newDiv.className="single-result row align-items-center my-3 p-3";
-           
-      
-       
-    newDiv.innerHTML=`
+
+        const newDiv = document.createElement("div");
+        newDiv.className = "single-result row align-items-center my-3 p-3";
+
+
+
+        newDiv.innerHTML = `
         
     <div class="col-md-9">
     <h3 class="lyrics-name">${song.album.title}</h3>
@@ -34,38 +34,38 @@ const displaySong= (songs) => {
     </div>
         `;
         containerSong.appendChild(newDiv);
-      
-   });
+
+    });
 }
 
-const getLyrics= async(artist,title) => {
+const getLyrics = async (artist, title) => {
 
 
-    try{
-        const res =await   fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
+    try {
+        const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
 
-        const data =await res.json();
-         getLyricsDisplay(data.lyrics)
+        const data = await res.json();
+        getLyricsDisplay(data.lyrics)
     }
-    catch(err){
+    catch (err) {
 
         getLyricsDisplay("Sorry ! I failed to load lyrics")
     }
- 
-    
-}
-
-
-const getLyricsDisplay = (lyrics) =>{
-   const lyricsDiv=document.getElementById("single-Larics");
-    lyricsDiv.innerHTML=lyrics;
-       
 
 
 }
 
-const displayError = err =>{
 
-    const errorTag =document.getElementById("error-messege");
-    errorTag.innerHTML= err;
+const getLyricsDisplay = (lyrics) => {
+    const lyricsDiv = document.getElementById("single-Larics");
+    lyricsDiv.innerHTML = lyrics;
+
+
+
+}
+
+const displayError = err => {
+
+    const errorTag = document.getElementById("error-messege");
+    errorTag.innerHTML = err;
 }
