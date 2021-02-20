@@ -1,7 +1,7 @@
 const SearchSongs = () => {
 
     const SearchInput = document.getElementById("search-input").value;
-
+    toggleSpinner();
     fetch(`https://api.lyrics.ovh/suggest/${SearchInput}`)
 
         .then(response => response.json())
@@ -34,6 +34,7 @@ const displaySong = (songs) => {
     </div>
         `;
         containerSong.appendChild(newDiv);
+        toggleSpinner();
 
     });
 }
@@ -68,4 +69,14 @@ const displayError = err => {
 
     const errorTag = document.getElementById("error-messege");
     errorTag.innerHTML = err;
+}
+
+
+const toggleSpinner = () => {
+
+    const spinner = document.getElementById("loading-spinner");
+    
+    spinner.classList.toggle("invisible");
+
+
 }
