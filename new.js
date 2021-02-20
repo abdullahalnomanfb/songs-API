@@ -9,6 +9,18 @@ const SearchSongs = () => {
         .catch(err => displayError("Something went wrong Plese try again !"))
 }
 
+
+ document.getElementById("search-input")
+ .addEventListener("keypress", function(event) {
+ 
+    if (event.key == "Enter"){
+        document.getElementById("search-button").click();
+    }
+    
+});
+
+
+
 const displaySong = (songs) => {
     document.getElementById("container-songs").innerHTML = '';
     const containerSong = document.getElementById("container-songs");
@@ -75,7 +87,7 @@ const displayError = err => {
 const toggleSpinner = () => {
 
     const spinner = document.getElementById("loading-spinner");
-    
+
     spinner.classList.toggle("invisible");
 
 
